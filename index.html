@@ -1,0 +1,140 @@
+
+<html>
+
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script src="multilayer-network-visualization/multilayer-network-visualization.js"></script>
+<link rel="stylesheet" type="text/css" href="multilayer-network-visualization/multilayer-network-visualization.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+<script src="bootstrap-multiselect/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" type="text/css" href="bootstrap-multiselect/bootstrap-multiselect.css" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+<body> 
+
+<div class="container">
+
+<div class="header">
+<h1 class="header-title">Multilayer network visualization</h1>
+<p class="header-description">Visualizing multilayer networks</p>
+</div>
+
+<div class="row">
+
+    <div id="content" class="col-sm-8">
+
+    <h2>Get started</h2>
+
+    <p>First, make sure you included appropriate .js and .css files inside the <code>&lt;script&gt;</code> tag of your web page:</p>
+
+<pre style="border:none;background-color:white;">
+<code class="html">&lt;script src="multilayer-network-visualization.js"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" type="text/css" href="multilayer-network-visualization.css" /&gt;
+</code></pre>
+
+    <p>Unfortunately, in order for this multilayer network visualization to work properly, you also need to explicitly include all of its dependencies: <a href="https://jquery.com/">jQuery</a>, <a href="http://d3js.org/">D3</a>, <a href="http://getbootstrap.com/">Bootstrap</a> and <a href="https://github.com/davidstutz/bootstrap-multiselect">bootstrap-multiselect</a> plugin. Luckily, with the exception of the bootstrap-multiselect plugin, there are CDN's available for all of the above. In the future versions these dependencies will be handled with the Angular's <a href="https://docs.angularjs.org/guide/di">dependency injection</a>. Read the detailed instructions <a href="html/additional-dependencies.html">here</a>.</p>
+
+    <p>Next, include the following bellow somewhere inside your html. The <code>initial-url</code> attribute is a path to the .json file which contains network you want to visualize. As the default behavior of the <code>&lt;force-layout&gt;</code> is not to draw any links initially, use <code>show-all</code> attribute to draw them. Optionally you can also provide <code>width</code> and <code>height</code> attributes for the visualization, default values are 600x500.</p>
+
+<pre style="border:none;background-color:white;">
+<code class="html">&lt;div ng-app="networkApp" ng-controller="networkCtrl"&gt;
+    &lt;force-layout initial-url="data/trade-network-onelayer.json" show-all="true" width="600" height="500"&gt;&lt;/force-layout&gt;
+&lt;/div&gt;
+</code></pre>
+
+    <p>Which should generate simple network visualization like this:</p>
+
+    <div ng-app="networkApp" ng-controller="networkCtrl">
+        <force-layout initial-url="data/trade-network-onelayer.json" show-all="true" width="600" height="500"></force-layout>
+    </div>
+
+    <p>The format of the <code>trade-network-onelayer.json</code> file should be like this:</p>
+
+<pre style="overflow:auto;height:200px;border:none;background-color:white;"><code class="json">{"links":[
+    {"source":1,"target":0,"weight":1539.858,
+     "product":29,"year":1995,"direction":"export"},
+    {"source":2,"target":0,"weight":41344.709,
+     "product":29,"year":1995,"direction":"export"},
+    {"source":3,"target":0,"weight":31923.761,
+     "product":29,"year":1995,"direction":"export"},
+    {"source":4,"target":0,"weight":4585.626,
+     "product":29,"year":1995,"direction":"export"},
+    {"source":5,"target":0,"weight":26440.3,
+     "product":29,"year":1995,"direction":"export"},
+    {"source":6,"target":0,"weight":2282.995,
+     "product":29,"year":1995,"direction":"export"}],
+"nodes":[
+    {"label":"Australia","population":22683600},
+    {"label":"Austria","population":8462446},
+    {"label":"Brazil","population":198656019},
+    {"label":"Canada","population":34880491},
+    {"label":"Croatia","population":4669000},
+    {"label":"Denmark","population":5590478},
+    {"label":"Hungary","population":10328965},
+    {"label":"Iceland","population":320137},
+    {"label":"Israel","population":7907900}],
+"product":[
+    {"id":29,"label":"Food and live animals"},
+    {"id":40,"label":"Beverages and tobacco"},
+    {"id":72,"label":"Manufactured goods"},
+    {"id":79,"label":"Iron and steel"},
+    {"id":89,"label":"Road vehicles"},
+    {"id":98,"label":"Total all products"}],
+"year":[
+    {"id":1995},
+    {"id":1996},
+    {"id":1997},
+    {"id":1998}],
+"direction":[
+    {"id":"export"}]}
+</code></pre>
+
+    <p>The structure should contain two mandatory arrays: <code>links</code> and <code>nodes</code>. Each link is a object with <code>source</code> and <code>target</code> indexes that correspond to the indexes of the nodes in the <code>nodes</code> array. It is not possible to use custom defined indexes in the <code>nodes</code> array. This is a limitation of the D3's force layout. All other attributes are optional, some of which are mapped to the visual elements in the following way:</p>
+
+    <ol class="list-unstyled">
+        <li><code>weight</code> (in the <code>links</code> array): thickness of the links</li>
+        <li><code>label</code> (in the <code>nodes</code> array): label of a node</li>
+        <li><code>population</code> (in the <code>nodes</code> array): size of a node</li>
+    </ol>
+
+    <p>All other link attributes are considered to define aspects of the network. In order for the visualizaton to register them you have to provide them in separate arrays having mandatory <code>id</code> attribute and an optional <code>label</code> attribute. In the above case our aspects are <code>product</code>, <code>year</code> and <code>direction</code>. Each aspect could be separately selected with the <code>&lt;aspect-selector&gt;</code> directive that is explained <a href="aspect-selector.html">here</a>.</p>
+
+    </div>
+
+    <div class="col-sm-3 col-sm-offset-1">
+
+    <div class="sidebar-module">
+    <h4>Examples</h4>
+    <ol class="list-unstyled">
+        <li><a href="index.html">Get started</a></li>
+        <li><a href="html/aspect-selector.html">Aspect selector</a></li>
+        <li><a href="html/load-from-url.html">Load network from URL</a></li>
+        <li><a href="html/load-with-query.html">Load network with URL query builder</a></li>
+        <li><a href="html/load-from-user.html">Load network from user</a></li>
+        <li><a href="html/server-load-button.html">Server load button</a></li>
+        <li><a href="html/network-dump.html">Output loaded network</a></li>
+        <li><a href="html/additional-dependencies.html">Additional dependencies</a></li>
+    </ol>
+    </div>
+
+    </div>
+
+<div style="height:50px;clear:both;"></div>
+
+</div>
+
+</body> 
+
+</html>

@@ -1,0 +1,88 @@
+
+.chart {
+    background: #eee;
+    padding: 3px;
+}
+ 
+.chart div {
+  width: 0;
+  transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -webkit-transition: all 1s ease-out;
+}
+ 
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 5px;
+  color: white;
+  box-shadow: 2px 2px 2px #666;
+}
+
+.node {
+  stroke: #000;
+  stroke-width: 1.5px;
+  fill: #fff
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+.node text {
+  font: 12px helvetica;
+  font-weight: 100;
+  font-variant: small-caps;
+  stroke: none;
+  fill: #000;
+  cursor: default;
+}
+
+.layerList span {
+  font: 14px helvetica;
+  font-weight: 100;
+  font-variant: small-caps;
+  stroke: none;
+  color: black;
+  cursor: default;
+}
+
+.layerList span:hover {
+  color: steelblue;
+}
+
+.layerList .selected {
+  color: steelblue;
+}
+
+.networkDump {
+  overflow:auto;
+  height:200px;
+  border:none;
+  background-color:#F8F8F8;
+}
+
+/* This is a hack needed for Bootsrtap rendering of input (type="file") button */
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+

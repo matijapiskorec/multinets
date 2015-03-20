@@ -1,0 +1,17 @@
+{
+  "name": "rest-server",
+  "version": "0.0.0",
+  "description": "Dependencies for REST server that fetches data from sqlite database.",
+  "main": "rest_server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "sqlite3": "~3.0.5",
+    "express": "~4.12.3",
+    "cors": "~2.5.3",
+    "underscore": "~1.8.2"
+  }
+}

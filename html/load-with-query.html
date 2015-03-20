@@ -1,0 +1,98 @@
+
+<html>
+
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+<script src="../multilayer-network-visualization/multilayer-network-visualization.js"></script>
+<link rel="stylesheet" type="text/css" href="../multilayer-network-visualization/multilayer-network-visualization.css" />
+<link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+<script src="../bootstrap-multiselect/bootstrap-multiselect.js"></script>
+<link rel="stylesheet" type="text/css" href="../bootstrap-multiselect/bootstrap-multiselect.css" />
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/github.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+
+<body> 
+
+<div class="container">
+
+<div class="header">
+<h1 class="header-title">Multilayer network visualization</h1>
+<p class="header-description">Visualizing multilayer networks</p>
+</div>
+
+<div class="row">
+
+    <div id="content" class="col-sm-8">
+
+    <h2>Load network with URL query builder</h2>
+
+    <p>If you have a REST service that provides you with the network data, you can use the <code>&lt;rest-load&gt;</code> directive to help you assemble appropriate url query. <code>info-url</code> should provide information on the data available on the server. For example:</p>
+
+<pre style="overflow:auto;height:200px;border:none;background-color:white;"><code class="json">{"countries":[
+  {"id":12,"label":"Australia"},
+  {"id":66,"label":"Equatorial Guinea"},
+  {"id":214,"label":"United Kingdom"}],
+"product":[
+  {"id":35,"label":"Vegetables and fruits"},
+  {"id":66,"label":"Medicinal and pharmaceutical products"},
+  {"id":106,"label":"Non-ferrous metals"}],
+"year":[
+  {"id":"1995","label":"1995"},
+  {"id":"1996","label":"1996"},
+  {"id":"1997","label":"1997"}]}
+</code></pre>
+
+    <p>This information will be queried immediately after the app loads. All further queries will be directed to the url defined in the <code>url</code> attribute of the <code>&lt;rest-load&gt;</code> directive.</p>
+
+<pre style="border:none;background-color:white;">
+<code class="html">&lt;div ng-app="networkApp" ng-controller="networkCtrl"&gt;
+    &lt;rest-load info-url="http://zel.irb.hr/matija/datainfo" url="http://zel.irb.hr/matija/data"&gt;&lt;/rest-load&gt;
+    &lt;aspect-selector&gt;&lt;/aspect-selector&gt;
+    &lt;force-layout&gt;&lt;/force-layout&gt;
+&lt;/div&gt;
+</code></pre>
+
+    <div ng-app="networkApp" ng-controller="networkCtrl">
+        <rest-load info-url="http://zel.irb.hr/matija/datainfo" url="http://zel.irb.hr/matija/data"></rest-load><br>
+        <aspect-selector></aspect-selector>
+        <force-layout></force-layout>
+    </div>
+
+    </div>
+
+    <div class="col-sm-3 col-sm-offset-1">
+
+    <div class="sidebar-module">
+    <h4>Examples</h4>
+    <ol class="list-unstyled">
+        <li><a href="../index.html">Get started</a></li>
+        <li><a href="aspect-selector.html">Aspect selector</a></li>
+        <li><a href="load-from-url.html">Load network from URL</a></li>
+        <li><a href="load-with-query.html">Load network with URL query builder</a></li>
+        <li><a href="load-from-user.html">Load network from user</a></li>
+        <li><a href="server-load-button.html">Server load button</a></li>
+        <li><a href="network-dump.html">Output loaded network</a></li>
+        <li><a href="additional-dependencies.html">Additional dependencies</a></li>
+    </ol>
+    </div>
+
+    </div>
+
+<div style="height:50px;clear:both;"></div>
+
+</div>
+
+</body> 
+
+</html>
