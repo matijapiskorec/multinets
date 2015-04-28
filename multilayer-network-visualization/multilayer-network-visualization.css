@@ -32,6 +32,14 @@
   stroke-opacity: .6;
 }
 
+path.arc {
+  pointer-events: none;
+  fill: none;
+  display: inherit;
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
 .node text {
   font: 12px helvetica;
   font-weight: 100;
@@ -39,6 +47,11 @@
   stroke: none;
   fill: #000;
   cursor: default;
+}
+
+.country {
+  stroke: black;
+  fill: #dddddd;
 }
 
 .layerList span {
