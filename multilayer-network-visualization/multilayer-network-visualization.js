@@ -69,7 +69,8 @@ networkApp.directive('forceLayout', function ($parse) {
         link = svg.selectAll(".link")
             .data(initialLinks).enter().append("line")
             .attr("class", "link")
-            .style("stroke-width", function(d) { return 0.01*Math.sqrt(d.weight); });
+            .style("stroke-width", function(d) { return 0.01*Math.sqrt(d.weight); })
+            .style("stroke", function(d) { return color(d.product); });
 
         var node = svg.selectAll(".node")
             .data(graph.nodes)
@@ -112,7 +113,14 @@ networkApp.directive('forceLayout', function ($parse) {
         link.exit().remove();
         link.enter().insert("line",":first-child")
           .attr("class", "link")
-          .style("stroke-width", function(d) { return 0.01*Math.sqrt(d.weight); });
+          .style("stroke-width", function(d) { return 0.01*Math.sqrt(d.weight); })
+          .style("stroke", function(d) { return color(d.product); });
+
+        // TODO: Strange behavior with switching of layers! In some cases links
+        // from multiple layers are visible although only one layer is selected.
+        // This is maybe due to link.exit() selection which (maybe) regards two
+        // links as equal if they are equal source and target, although they
+        // differ in product and other aspects.
 
         force.links(selectedLinks)
         force.start();
@@ -563,7 +571,9 @@ networkApp.directive('geoLayout', function ($parse) {
             .attr("class", "arc")
             .attr("d", function(d) {
                     return path(arc({'target': d.targetLabel, 'source': d.sourceLabel})); })
-                .style("stroke-width", function(d) { return 0.01*Math.sqrt(d.weight); });
+                .style("stroke-width", function(d) { return 0.01*Math.sqrt(d.weight); })
+                .style("stroke", function(d) { return color(d.product); });
+
 
       });
 
@@ -579,7 +589,8 @@ networkApp.directive('geoLayout', function ($parse) {
             .attr("class", "arc")
             .attr("d", function(d) {
                     return path(arc({'target': d.targetLabel, 'source': d.sourceLabel})); })
-                .style("stroke-width", function(d) { return 0.01*Math.sqrt(d.weight); });
+                .style("stroke-width", function(d) { return 0.01*Math.sqrt(d.weight); })
+                .style("stroke", function(d) { return color(d.product); });
 
       });
 
