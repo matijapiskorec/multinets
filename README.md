@@ -14,4 +14,4 @@ There are many static network files available, also it's possible for user to up
 nodemon rest_server.js
 ```
 
-This visualization is [live](http://matijapiskorec.github.io/multilayer-network-visualization/) on [GitHub Pages](https://pages.github.com/). We try to manually keep master and gh-pages branches in synch.
+This visualization is [live](http://matijapiskorec.github.io/multinets/) on [GitHub Pages](https://pages.github.com/). We try to manually keep master and gh-pages branches in synch.
